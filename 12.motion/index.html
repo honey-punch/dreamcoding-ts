@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motion</title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/main.css">
+
+  <!-- js -->
+  <script src="./build/main.js" defer></script>
+
+  <!-- google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/9dd32a8b92.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">MOTION</div>
+    <ul class="btn-list">
+      <li><a class="url-btn btn" href="#">IMAGE</a></li>
+      <li><a class="url-btn btn" href="#">VIDEO</a></li>
+      <li><a class="string-btn btn" href="#">NOTE</a></li>
+      <li><a class="string-btn btn" href="#">TASK</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <!-- <div class="url-component component">
+      <iframe src="https://picsum.photos/250/200" frameborder="0" width="250px" height="100%"></iframe>
+      <div class="component-title">Title</div>
+      <button type="button" class="delete-btn btn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="string-component component">
+      <div class="component-title">Title</div>
+      <div class="component-description">Description</div>
+      <button type="button" class="delete-btn btn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div> -->
+  </main>
+  <footer>
+    
+  </footer>
+
+  <!-- dialog -->
+  <form class="dialog url-dialog">
+    <div class="title">
+      <span>Title</span>
+      <input type="text" id="url-title">
+    </div>
+    <div class="url">
+      <span>URL</span>
+      <input type="url" id="url-url">
+    </div>
+    <div class="confirm">
+      <button class="add-btn btn" type="submit" id="url-title-btn">
+        <i class="fa-solid fa-check"></i>
+        <span>ADD</span>
+      </button>
+      <button class="close-btn btn" type="button">
+        <i class="fa-solid fa-xmark"></i>
+        <span>CLOSE</span>
+      </button>
+    </div>
+  </form>
+
+  <form class="dialog string-dialog">
+    <div class="title">
+      <span>Title</span>
+      <input type="text" id="string-title">
+    </div>
+    <div class="description">
+      <span>Description</span>
+      <input type="text" id="string-description">
+    </div>
+    <div class="confirm">
+      <button class="add-btn btn" type="submit">
+        <i class="fa-solid fa-check"></i>
+        <span>ADD</span>
+      </button>
+      <button class="close-btn btn" type="button">
+        <i class="fa-solid fa-xmark"></i>
+        <span>CLOSE</span>
+      </button>
+    </div>
+  </form>
+</body>
+</html>
