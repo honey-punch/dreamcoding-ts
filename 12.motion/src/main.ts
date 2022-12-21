@@ -27,64 +27,81 @@ closeBtns.forEach(e => {e.addEventListener('click', () => {
   closeDialog()
 })});
 
+
 interface Component {
-  generate(title: string, url?: string, description?: string): void;
+  generate(): void;
 }
 
 class UrlComponent implements Component {
+  main = document.querySelector('main');
+  component = document.createElement('div');
+  componentTitle = document.createElement('div');
+  iFrame = document.createElement('iframe');
+  button = document.createElement('button');
+  icon = document.createElement('i');
+
   constructor(private title: string, private url: string) {}
+
   generate(): void {
-    const main = document.querySelector('main');
-    const component = document.createElement('div');
-    const componentTitle = document.createElement('div');
-    const iFrame = document.createElement('iframe');
-    const button = document.createElement('button');
-    const icon = document.createElement('i');
-
-    component.setAttribute('class', 'url-component component');
-    componentTitle.setAttribute('class','component-title');
-    button.setAttribute('class', 'delete-btn btn');
-    icon.setAttribute('class', 'fa-solid fa-xmark');
+    this.component.setAttribute('class', 'url-component component');
+    this.componentTitle.setAttribute('class','component-title');
+    this.button.setAttribute('class', 'delete-btn btn');
+    this.icon.setAttribute('class', 'fa-solid fa-xmark');
     
-    main?.appendChild(component);
-    component?.appendChild(iFrame)
-    component?.appendChild(componentTitle);
-    component?.appendChild(button);
-    button?.appendChild(icon);
+    this.main?.appendChild(this.component);
+    this.component?.appendChild(this.iFrame)
+    this.component?.appendChild(this.componentTitle);
+    this.component?.appendChild(this.button);
+    this.button?.appendChild(this.icon);
 
-    componentTitle.innerText = this.title;
-    iFrame.src = this.url;
-
-    const inputDataTitle = document.getElementById('url-title') as HTMLInputElement;
-    const inputDataUrl = document.getElementById('url-url') as HTMLInputElement;
-    this.title = inputDataTitle.value;
-    this.url = inputDataUrl.value;
-
-    urlDialog?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      urlDialog.classList.remove('display');
-      new UrlComponent(this.title, this.url).generate();
-    })
+    this.componentTitle.innerText = this.title;
+    this.iFrame.src = this.url;
   }
 }
-const inputDataTitle = document.getElementById('url-title') as HTMLInputElement;
-const inputDataUrl = document.getElementById('url-url') as HTMLInputElement;
 
+class StringComponent implements Component {
+  main = document.querySelector('main');
+  component = document.createElement('div');
+  componentTitle = document.createElement('div');
+  componentDescription = document.createElement('div');
+  button = document.createElement('button');
+  icon = document.createElement('i');
+
+  constructor(private title: string, private description: string) {}
+
+  generate(): void {
+    this.component.setAttribute('class', 'string-component component');
+    this.componentTitle.setAttribute('class','component-title');
+    this.componentDescription.setAttribute('class', 'component-description')
+    this.button.setAttribute('class', 'delete-btn btn');
+    this.icon.setAttribute('class', 'fa-solid fa-xmark');
+    
+    this.main?.appendChild(this.component);
+    this.component?.appendChild(this.componentTitle);
+    this.component?.appendChild(this.componentDescription);
+    this.component?.appendChild(this.button);
+    this.button?.appendChild(this.icon);
+    
+    this.componentTitle.innerText = this.title;
+    this.componentDescription.innerText = this.description;
+  }
+  static delete(): void {
+    this.component.remove();
+  }
+}
+
+const inputUrlTitle = document.getElementById('url-title') as HTMLInputElement;
+const inputUrl = document.getElementById('url-url') as HTMLInputElement;
 urlDialog?.addEventListener('submit', (e) => {
   e.preventDefault();
   urlDialog.classList.remove('display');
-  new UrlComponent(inputDataTitle.value, inputDataUrl.value).generate();
+  new UrlComponent(inputUrlTitle.value, inputUrl.value).generate();
 });
-// component를 만들어 generate함수 쓰는 과정 다시 한번 설계해보기
 
-class StringComponent implements Component {
-  constructor(private title: string, private description: string) {}
-  generate(): void {
-    const inputDataTitle = document.getElementById('string-title') as HTMLInputElement;
-    this.title = inputDataTitle.value;
-    const inputDataDescription = document.getElementById('string-description') as HTMLInputElement;
-    this.description = inputDataDescription.value;
-  }
-}
-
-
+const inputStringTitle = document.getElementById('string-title') as HTMLInputElement;
+const inputString = document.getElementById('string-description') as HTMLInputElement;
+stringDialog?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  stringDialog.classList.remove('display');
+  new StringComponent(inputStringTitle.value, inputString.value).generate();
+});

@@ -30,57 +30,72 @@ var UrlComponent = /** @class */ (function () {
     function UrlComponent(title, url) {
         this.title = title;
         this.url = url;
+        this.main = document.querySelector('main');
+        this.component = document.createElement('div');
+        this.componentTitle = document.createElement('div');
+        this.iFrame = document.createElement('iframe');
+        this.button = document.createElement('button');
+        this.icon = document.createElement('i');
     }
     UrlComponent.prototype.generate = function () {
-        var _this = this;
-        var main = document.querySelector('main');
-        var component = document.createElement('div');
-        var componentTitle = document.createElement('div');
-        var iFrame = document.createElement('iframe');
-        var button = document.createElement('button');
-        var icon = document.createElement('i');
-        component.setAttribute('class', 'url-component component');
-        componentTitle.setAttribute('class', 'component-title');
-        button.setAttribute('class', 'delete-btn btn');
-        icon.setAttribute('class', 'fa-solid fa-xmark');
-        main === null || main === void 0 ? void 0 : main.appendChild(component);
-        component === null || component === void 0 ? void 0 : component.appendChild(iFrame);
-        component === null || component === void 0 ? void 0 : component.appendChild(componentTitle);
-        component === null || component === void 0 ? void 0 : component.appendChild(button);
-        button === null || button === void 0 ? void 0 : button.appendChild(icon);
-        componentTitle.innerText = this.title;
-        iFrame.src = this.url;
-        var inputDataTitle = document.getElementById('url-title');
-        var inputDataUrl = document.getElementById('url-url');
-        this.title = inputDataTitle.value;
-        this.url = inputDataUrl.value;
-        urlDialog === null || urlDialog === void 0 ? void 0 : urlDialog.addEventListener('submit', function (e) {
-            e.preventDefault();
-            urlDialog.classList.remove('display');
-            new UrlComponent(_this.title, _this.url).generate();
-        });
+        var _a, _b, _c, _d, _e;
+        this.component.setAttribute('class', 'url-component component');
+        this.componentTitle.setAttribute('class', 'component-title');
+        this.button.setAttribute('class', 'delete-btn btn');
+        this.icon.setAttribute('class', 'fa-solid fa-xmark');
+        (_a = this.main) === null || _a === void 0 ? void 0 : _a.appendChild(this.component);
+        (_b = this.component) === null || _b === void 0 ? void 0 : _b.appendChild(this.iFrame);
+        (_c = this.component) === null || _c === void 0 ? void 0 : _c.appendChild(this.componentTitle);
+        (_d = this.component) === null || _d === void 0 ? void 0 : _d.appendChild(this.button);
+        (_e = this.button) === null || _e === void 0 ? void 0 : _e.appendChild(this.icon);
+        this.componentTitle.innerText = this.title;
+        this.iFrame.src = this.url;
     };
     return UrlComponent;
 }());
-var inputDataTitle = document.getElementById('url-title');
-var inputDataUrl = document.getElementById('url-url');
-urlDialog === null || urlDialog === void 0 ? void 0 : urlDialog.addEventListener('submit', function (e) {
-    e.preventDefault();
-    urlDialog.classList.remove('display');
-    new UrlComponent(inputDataTitle.value, inputDataUrl.value).generate();
-});
-// component를 만들어 generate함수 쓰는 과정 다시 한번 설계해보기
 var StringComponent = /** @class */ (function () {
     function StringComponent(title, description) {
         this.title = title;
         this.description = description;
+        this.main = document.querySelector('main');
+        this.component = document.createElement('div');
+        this.componentTitle = document.createElement('div');
+        this.componentDescription = document.createElement('div');
+        this.button = document.createElement('button');
+        this.icon = document.createElement('i');
     }
     StringComponent.prototype.generate = function () {
-        var inputDataTitle = document.getElementById('string-title');
-        this.title = inputDataTitle.value;
-        var inputDataDescription = document.getElementById('string-description');
-        this.description = inputDataDescription.value;
+        var _a, _b, _c, _d, _e;
+        this.component.setAttribute('class', 'string-component component');
+        this.componentTitle.setAttribute('class', 'component-title');
+        this.componentDescription.setAttribute('class', 'component-description');
+        this.button.setAttribute('class', 'delete-btn btn');
+        this.icon.setAttribute('class', 'fa-solid fa-xmark');
+        (_a = this.main) === null || _a === void 0 ? void 0 : _a.appendChild(this.component);
+        (_b = this.component) === null || _b === void 0 ? void 0 : _b.appendChild(this.componentTitle);
+        (_c = this.component) === null || _c === void 0 ? void 0 : _c.appendChild(this.componentDescription);
+        (_d = this.component) === null || _d === void 0 ? void 0 : _d.appendChild(this.button);
+        (_e = this.button) === null || _e === void 0 ? void 0 : _e.appendChild(this.icon);
+        this.componentTitle.innerText = this.title;
+        this.componentDescription.innerText = this.description;
+    };
+    StringComponent.delete = function () {
+        this.component.remove();
     };
     return StringComponent;
 }());
+var inputUrlTitle = document.getElementById('url-title');
+var inputUrl = document.getElementById('url-url');
+urlDialog === null || urlDialog === void 0 ? void 0 : urlDialog.addEventListener('submit', function (e) {
+    e.preventDefault();
+    urlDialog.classList.remove('display');
+    new UrlComponent(inputUrlTitle.value, inputUrl.value).generate();
+});
+var inputStringTitle = document.getElementById('string-title');
+var inputString = document.getElementById('string-description');
+stringDialog === null || stringDialog === void 0 ? void 0 : stringDialog.addEventListener('submit', function (e) {
+    e.preventDefault();
+    stringDialog.classList.remove('display');
+    new StringComponent(inputStringTitle.value, inputString.value).generate();
+});
 //# sourceMappingURL=main.js.map
