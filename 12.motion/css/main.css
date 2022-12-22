@@ -82,9 +82,6 @@ main {
   font-size: var(--font-size-medium);
   font-weight: var(--font-weight-bold);
 }
-.component-description {
-  font-size: var(--font-size-small);
-}
 .delete-btn {
   background: none;
   position: absolute;
@@ -92,7 +89,7 @@ main {
   right: 20px;
   transform: translate(0, -50%);
 }
-
+/* url-component */
 .url-component {
   display: flex;
   height: 200px;
@@ -100,7 +97,7 @@ main {
 .url-component .component-title {
   margin: 20px;
 }
-
+/* string-component */
 .string-component {
   height: 150px;
   padding: 20px;
@@ -108,6 +105,9 @@ main {
 }
 .string-component .component-title {
   margin-bottom: 20px;
+}
+.string-component .component-description {
+  font-size: var(--font-size-small);
 }
 
 /* footer */
