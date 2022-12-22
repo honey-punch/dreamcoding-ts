@@ -26,8 +26,8 @@ closeBtns.forEach(function (e) {
 });
 // component
 var main = document.querySelector('main');
-var deleteBtns = document.querySelectorAll('.delete-btn');
-var components = document.querySelectorAll('.component');
+var deleteBtns = document.querySelector('.delete-btn');
+var components = document.querySelector('.component');
 var UrlComponent = /** @class */ (function () {
     function UrlComponent(title, url) {
         this.title = title;
@@ -59,13 +59,8 @@ var inputUrl = document.getElementById('url-url');
 urlDialog === null || urlDialog === void 0 ? void 0 : urlDialog.addEventListener('submit', function (e) {
     e.preventDefault();
     urlDialog.classList.remove('display');
-    new UrlComponent(inputUrlTitle.value, inputUrl.value).generate();
-});
-deleteBtns.forEach(function (e, i) {
-    deleteBtns[i].addEventListener('click', function () {
-        components[i].remove();
-        console.log('done');
-    });
+    var newComponent = new UrlComponent(inputUrlTitle.value, inputUrl.value);
+    newComponent.generate();
 });
 var StringComponent = /** @class */ (function () {
     function StringComponent(title, description) {
@@ -99,6 +94,7 @@ var inputString = document.getElementById('string-description');
 stringDialog === null || stringDialog === void 0 ? void 0 : stringDialog.addEventListener('submit', function (e) {
     e.preventDefault();
     stringDialog.classList.remove('display');
-    new StringComponent(inputStringTitle.value, inputString.value).generate();
+    var newComponent = new UrlComponent(inputUrlTitle.value, inputUrl.value);
+    newComponent.generate();
 });
 //# sourceMappingURL=main.js.map
