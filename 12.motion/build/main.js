@@ -1,8 +1,6 @@
 "use strict";
-var btns = document.querySelectorAll('header .btn');
-var urlBtns = document.querySelectorAll('.url-btn');
-var stringBtns = document.querySelectorAll('.string-btn');
-var addBtns = document.querySelectorAll('.add-btn');
+// dialog
+var openBtns = document.querySelectorAll('.open-btn');
 var closeBtns = document.querySelectorAll('.close-btn');
 var dialogs = document.querySelectorAll('.dialog');
 var urlDialog = document.querySelector('.url-dialog');
@@ -18,7 +16,7 @@ function openDialog(element) {
 function closeDialog() {
     dialogs.forEach(function (e) { e.classList.remove('display'); });
 }
-btns.forEach(function (e) { return e.addEventListener('click', function () {
+openBtns.forEach(function (e) { return e.addEventListener('click', function () {
     openDialog(e);
 }); });
 closeBtns.forEach(function (e) {
@@ -26,11 +24,14 @@ closeBtns.forEach(function (e) {
         closeDialog();
     });
 });
+// component
+var main = document.querySelector('main');
+var deleteBtns = document.querySelectorAll('.delete-btn');
+var components = document.querySelectorAll('.component');
 var UrlComponent = /** @class */ (function () {
     function UrlComponent(title, url) {
         this.title = title;
         this.url = url;
-        this.main = document.querySelector('main');
         this.component = document.createElement('div');
         this.componentTitle = document.createElement('div');
         this.iFrame = document.createElement('iframe');
@@ -38,51 +39,20 @@ var UrlComponent = /** @class */ (function () {
         this.icon = document.createElement('i');
     }
     UrlComponent.prototype.generate = function () {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d;
+        main === null || main === void 0 ? void 0 : main.appendChild(this.component);
+        (_a = this.component) === null || _a === void 0 ? void 0 : _a.appendChild(this.iFrame);
+        (_b = this.component) === null || _b === void 0 ? void 0 : _b.appendChild(this.componentTitle);
+        (_c = this.component) === null || _c === void 0 ? void 0 : _c.appendChild(this.button);
+        (_d = this.button) === null || _d === void 0 ? void 0 : _d.appendChild(this.icon);
         this.component.setAttribute('class', 'url-component component');
         this.componentTitle.setAttribute('class', 'component-title');
         this.button.setAttribute('class', 'delete-btn btn');
         this.icon.setAttribute('class', 'fa-solid fa-xmark');
-        (_a = this.main) === null || _a === void 0 ? void 0 : _a.appendChild(this.component);
-        (_b = this.component) === null || _b === void 0 ? void 0 : _b.appendChild(this.iFrame);
-        (_c = this.component) === null || _c === void 0 ? void 0 : _c.appendChild(this.componentTitle);
-        (_d = this.component) === null || _d === void 0 ? void 0 : _d.appendChild(this.button);
-        (_e = this.button) === null || _e === void 0 ? void 0 : _e.appendChild(this.icon);
         this.componentTitle.innerText = this.title;
         this.iFrame.src = this.url;
     };
     return UrlComponent;
-}());
-var StringComponent = /** @class */ (function () {
-    function StringComponent(title, description) {
-        this.title = title;
-        this.description = description;
-        this.main = document.querySelector('main');
-        this.component = document.createElement('div');
-        this.componentTitle = document.createElement('div');
-        this.componentDescription = document.createElement('div');
-        this.button = document.createElement('button');
-        this.icon = document.createElement('i');
-    }
-    StringComponent.prototype.generate = function () {
-        var _a, _b, _c, _d, _e;
-        this.component.setAttribute('class', 'string-component component');
-        this.componentTitle.setAttribute('class', 'component-title');
-        this.componentDescription.setAttribute('class', 'component-description');
-        this.button.setAttribute('class', 'delete-btn btn');
-        this.icon.setAttribute('class', 'fa-solid fa-xmark');
-        (_a = this.main) === null || _a === void 0 ? void 0 : _a.appendChild(this.component);
-        (_b = this.component) === null || _b === void 0 ? void 0 : _b.appendChild(this.componentTitle);
-        (_c = this.component) === null || _c === void 0 ? void 0 : _c.appendChild(this.componentDescription);
-        (_d = this.component) === null || _d === void 0 ? void 0 : _d.appendChild(this.button);
-        (_e = this.button) === null || _e === void 0 ? void 0 : _e.appendChild(this.icon);
-        this.componentTitle.innerText = this.title;
-        this.componentDescription.innerText = this.description;
-    };
-    StringComponent.delete = function () {
-        this.component.remove();
-    };
-    return StringComponent;
 }());
 var inputUrlTitle = document.getElementById('url-title');
 var inputUrl = document.getElementById('url-url');
@@ -91,6 +61,39 @@ urlDialog === null || urlDialog === void 0 ? void 0 : urlDialog.addEventListener
     urlDialog.classList.remove('display');
     new UrlComponent(inputUrlTitle.value, inputUrl.value).generate();
 });
+deleteBtns.forEach(function (e, i) {
+    deleteBtns[i].addEventListener('click', function () {
+        components[i].remove();
+        console.log('done');
+    });
+});
+var StringComponent = /** @class */ (function () {
+    function StringComponent(title, description) {
+        this.title = title;
+        this.description = description;
+        this.component = document.createElement('div');
+        this.componentTitle = document.createElement('div');
+        this.componentDescription = document.createElement('div');
+        this.button = document.createElement('button');
+        this.icon = document.createElement('i');
+    }
+    StringComponent.prototype.generate = function () {
+        var _a, _b, _c, _d;
+        main === null || main === void 0 ? void 0 : main.appendChild(this.component);
+        (_a = this.component) === null || _a === void 0 ? void 0 : _a.appendChild(this.componentTitle);
+        (_b = this.component) === null || _b === void 0 ? void 0 : _b.appendChild(this.componentDescription);
+        (_c = this.component) === null || _c === void 0 ? void 0 : _c.appendChild(this.button);
+        (_d = this.button) === null || _d === void 0 ? void 0 : _d.appendChild(this.icon);
+        this.component.setAttribute('class', 'string-component component');
+        this.componentTitle.setAttribute('class', 'component-title');
+        this.componentDescription.setAttribute('class', 'component-description');
+        this.button.setAttribute('class', 'delete-btn btn');
+        this.icon.setAttribute('class', 'fa-solid fa-xmark');
+        this.componentTitle.innerText = this.title;
+        this.componentDescription.innerText = this.description;
+    };
+    return StringComponent;
+}());
 var inputStringTitle = document.getElementById('string-title');
 var inputString = document.getElementById('string-description');
 stringDialog === null || stringDialog === void 0 ? void 0 : stringDialog.addEventListener('submit', function (e) {

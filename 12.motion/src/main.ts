@@ -25,7 +25,9 @@ closeBtns.forEach(e => {e.addEventListener('click', () => {
 })});
 
 // component
-const main = document.querySelector('main');
+const main = document.querySelector('main') as HTMLElement;
+const deleteBtns = document.querySelectorAll('.delete-btn');
+const components = document.querySelectorAll('.component');
 
 interface Component {
   generate(): void;
@@ -59,12 +61,18 @@ class UrlComponent implements Component {
 
 const inputUrlTitle = document.getElementById('url-title') as HTMLInputElement;
 const inputUrl = document.getElementById('url-url') as HTMLInputElement;
+
 urlDialog?.addEventListener('submit', (e) => {
   e.preventDefault();
   urlDialog.classList.remove('display');
   new UrlComponent(inputUrlTitle.value, inputUrl.value).generate();
 });
-
+deleteBtns.forEach((e , i) => {
+  deleteBtns[i].addEventListener('click', () => {
+    components[i].remove();
+    console.log('done');
+  })
+})
 
 class StringComponent implements Component {
   component = document.createElement('div');
